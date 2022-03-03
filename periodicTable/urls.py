@@ -20,12 +20,16 @@ from books.views import (
     RetrieveBooks, 
     RetrieveAuthors,
     CreateAuthor,
-    CreateBook)
+    CreateBook,
+    RetrieveAuthorAPIView,
+    RetrieveBookAPIView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', RetrieveBooks.as_view()),
     path('books/create/', CreateBook.as_view()),
+    path('books/<int:book_id>/', RetrieveBookAPIView.as_view()),
     path('authors/', RetrieveAuthors.as_view()),
     path('authors/create/', CreateAuthor.as_view()),
+    path('authors/<int:author_id>/', RetrieveAuthorAPIView.as_view()),
 ]
