@@ -22,14 +22,22 @@ from books.views import (
     CreateAuthor,
     CreateBook,
     RetrieveAuthorAPIView,
-    RetrieveBookAPIView)
+    RetrieveBookAPIView,
+    UpdateAuthorAPIView,
+    UpdateBookAPIView,
+    DeleteAuthorAPIView,
+    DeleteBookAPIView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', RetrieveBooks.as_view()),
     path('books/create/', CreateBook.as_view()),
+    path('books/update/<int:author_id>', UpdateBookAPIView.as_view()),
+    path('books/delete/<int:book_id>', DeleteBookAPIView.as_view()),
     path('books/<int:book_id>/', RetrieveBookAPIView.as_view()),
     path('authors/', RetrieveAuthors.as_view()),
     path('authors/create/', CreateAuthor.as_view()),
+    path('authors/update/<int:author_id>', UpdateAuthorAPIView.as_view()),
+    path('authors/delete/<int:author_id>', DeleteAuthorAPIView.as_view()),
     path('authors/<int:author_id>/', RetrieveAuthorAPIView.as_view()),
 ]

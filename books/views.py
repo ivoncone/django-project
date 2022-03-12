@@ -60,3 +60,40 @@ class RetrieveBookAPIView(APIView):
 		serializer = BookSerializer(book_obj)
 		return Response(serializer.data)
 
+class UpdateAuthorAPIView(APIView):
+	permissions_classes = (AllowAny, )
+	def put(self, request, author_id):
+		author_obj = Author.objects.filter(id=author_id).first()
+		serializer = AuthorSerializer(author_obj,data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+		return Response(serializer.data)
+
+class UpdateBookAPIView(APIView):
+	permissions_classes = (AllowAny, )
+	def put(self, request, author_id):
+		book_obj = Author.objects.filter(id=author_id).first()
+		serializer = BookSerializer(data=request.data)
+		serializer.is_valid(raise_exception=True)
+		serializer.update()
+		return Response(serializer.data)
+
+class DeleteAuthorAPIView(APIView):
+	permissions_classes = (AllowAny, )
+	def delete(self, request, author_id):
+		author_obj = Author.objects.get(id=author_id)
+		serializer = AuthorSerializer(data=request.data)
+		author_obj.delete()
+		return Response({"author has been deleted"})
+
+class DeleteBookAPIView(APIView):
+	permissions_classes = (AllowAny, )
+	def delete(self, request, book_id):
+		author_obj = Book.objects.get(id=book_id)
+		serializer = AuthorSerializer(data=request.data)
+		book_obj.delete()
+		return Response({"book has been deleted"})
+
+
+
+
